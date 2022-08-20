@@ -13,7 +13,7 @@ class Room(models.Model):
 class Event(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     room = models.ForeignKey(Room, on_delete=models.PROTECT)
-    date = models.DateTimeField(auto_now=False)
+    date = models.DateField(auto_now=False)
     type = models.CharField(max_length=10, null=True, blank=False)
 
 
