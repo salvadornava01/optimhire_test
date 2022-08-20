@@ -20,5 +20,6 @@ class Event(models.Model):
 class Book(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     event = models.ForeignKey(Event, on_delete=models.PROTECT)
-    date = models.DateTimeField(auto_now=False)
+    date = models.DateField(auto_now=False)
     capacity = models.IntegerField(null=True, blank=False)
+    customer_id = models.CharField(null=False, max_length=50)
