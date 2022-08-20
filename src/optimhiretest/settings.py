@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Custom middleware
-    "optimhiretest.CustomExceptionMiddleware.CustomExceptionMiddleware"
+    "optimhiretest.custom_exception_middleware.CustomExceptionMiddleware"
 ]
 
 ROOT_URLCONF = 'optimhiretest.urls'

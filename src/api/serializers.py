@@ -18,7 +18,8 @@ class EventSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'date',
-            'type'
+            'type',
+            'room_id'
         ]
 
 
@@ -31,3 +32,18 @@ class BookSerializer(serializers.ModelSerializer):
             'capacity',
             'customer_id'
         ]
+
+
+class CreateEventSerializer(serializers.Serializer):
+    date = serializers.DateField()
+    type = serializers.CharField()
+
+    def validate_type(self, value):
+        valid_types = ['private', 'public']
+        if value not in valid_types:
+            raise serializers.ValidationError(f'type must be one of the following values: {valid_types}')
+        return value
+
+
+class CreatePlaceBookSerializer(serializers.Serializer):
+    requested_capacity = serializers.IntegerField()

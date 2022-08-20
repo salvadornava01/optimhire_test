@@ -1,3 +1,4 @@
+import datetime
 import json
 import traceback
 
@@ -5,8 +6,9 @@ from django.http import HttpResponse
 
 
 class CustomViewException(Exception):
-    def __init__(self, value):
+    def __init__(self, value, http_code=500):
         self.value = value
+        self.http_code = http_code
 
     def __str__(self):
         return repr(self.value)
@@ -33,8 +35,9 @@ class CustomExceptionMiddleware:
         print(traceback.format_exc())
         exception_message = exception.value if isinstance(exception, CustomViewException) else exception.args[0]
         print(exception_message)
-        error_obj = {
+        response = {
+            'data': {},
+            'timestamp': str(datetime.datetime.now()),
             'error': f'{exception_message}'
         }
-        # TODO: create 'errors list' to identify and parse 'error-keywords' to specific error objects to be sent in response
-        return HttpResponse(json.dumps(error_obj), content_type="application/json", status=500)
+        return HttpResponse(json.dumps(response), content_type="application/json", status=exception.http_code)
