@@ -7,7 +7,7 @@ from django.db import models
 
 class Room(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    capacity = models.IntegerField(null=True, blank=False)
+    capacity = models.IntegerField(null=False, blank=False)
 
 
 class Event(models.Model):
