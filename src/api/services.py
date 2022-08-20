@@ -10,7 +10,11 @@ def create_room(
         *,
         serializer: RoomSerializer
 ) -> Room:
-
+    """
+    Create a Room
+    :param serializer:  is RoomSerializer
+    :return: created Room Object
+    """
     serializer.is_valid(raise_exception=True)
     return Room.objects.create(**serializer.validated_data)
 
@@ -21,7 +25,13 @@ def create_event(
         date,
         type
 ) -> Event:
-
+    """
+    Create an Event
+    :param room_id: Is Room ID where Event is going to be created
+    :param date: Is the date of the event
+    :param type: Is the type of the event, must be in ['public', 'private'] values
+    :return: a created Event
+    """
     try:
         room_found = get_object_or_404(Room, id=room_id)
     except:
@@ -40,6 +50,14 @@ def book_place(
         requested_capacity,
         customer_id
 ) -> Book:
+    """
+    Books a Place
+    :param room_id: Is Room ID where Book is going to be created
+    :param event_id: Is Event ID where Book is going to be created
+    :param requested_capacity: Is the capacity requested for Book
+    :param customer_id: Is the ID of the customer
+    :return: a created Book
+    """
     try:
         room_found = get_object_or_404(Room, id=room_id)
     except:
@@ -70,6 +88,12 @@ def cancel_book(
         book_id,
         customer_id
 ):
+    """
+    Cancel a Booked Place
+    :param book_id: ID of Booked Place to be canceled
+    :param customer_id: ID of the customer that request cancellation
+    :return: None
+    """
     try:
         booked_place_found = get_object_or_404(Book, id=book_id)
     except:

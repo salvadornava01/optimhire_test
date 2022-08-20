@@ -31,6 +31,12 @@ class CustomExceptionMiddleware:
         return response
 
     def process_exception(self, request, exception):
+        """
+        Custom exception processing
+        :param request: is request
+        :param exception: is exception to be handled
+        :return: HttpResponse to the client
+        """
 
         print(traceback.format_exc())
         exception_message = exception.value if isinstance(exception, CustomViewException) else exception.args[0]

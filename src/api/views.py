@@ -1,3 +1,4 @@
+from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
 from .models import Room
@@ -31,7 +32,7 @@ class CreateEventAPIView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = CreateEventSerializer(data=request.data)
         if not serializer.is_valid():
-            raise CustomViewException(serializer.errors, 400)
+            raise CustomViewException(serializer.errors, HTTP_400_BAD_REQUEST)
         created_event = create_event(room_id=self.kwargs['room_id'], **serializer.validated_data)
         return SuccessAPIResponse(EventSerializer(created_event).data)
 

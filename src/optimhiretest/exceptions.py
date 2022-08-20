@@ -1,8 +1,9 @@
 from rest_framework.exceptions import APIException, _get_error_details
+from rest_framework.status import HTTP_400_BAD_REQUEST
 
 
 class QueryParamException(APIException):
-    status_code = 400
+    status_code = HTTP_400_BAD_REQUEST
     default_detail = 'Query param should be defined'
 
 
@@ -14,5 +15,5 @@ class BadBodyRequestException(APIException):
             code = self.default_code
 
         self.detail = ','.join([f'field {field} error: {detail[field][0]}' for field in detail])
-    status_code = 400
+    status_code = HTTP_400_BAD_REQUEST
     default_detail = 'Body request is not correct'
