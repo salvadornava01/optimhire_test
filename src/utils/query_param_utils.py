@@ -1,4 +1,4 @@
-from src.optimhiretest.custom_exception_middleware import CustomViewException
+from optimhiretest.custom_exception_middleware import CustomViewException
 
 
 def get_query_param_or_bad_request(param_name, request_query_params):
